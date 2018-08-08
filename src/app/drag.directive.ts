@@ -12,6 +12,11 @@ export class DragDirective {
   @HostBinding('style.left.px') x = 0;
   @HostBinding('style.top.px') y = 0;
 
+  private startX: number;
+  private startY: number;
+  private mm = this.mousemove.bind(this);
+  private mu = this.mouseup.bind(this);
+
   @HostListener('mousedown', ['$event']) mousedown(event: MouseEvent) {
     event.preventDefault();
     this.startX = event.pageX - this.x;
@@ -20,11 +25,6 @@ export class DragDirective {
     document.addEventListener('mousemove', this.mm);
     document.addEventListener('mouseup', this.mu);
   }
-
-  private startX: number;
-  private startY: number;
-  private mm = this.mousemove.bind(this);
-  private mu = this.mouseup.bind(this);
 
   mousemove(event: MouseEvent) {
     this.x = event.pageX - this.startX;

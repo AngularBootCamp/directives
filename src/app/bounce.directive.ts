@@ -1,4 +1,4 @@
-import { Directive, OnInit, OnDestroy, Input, HostBinding } from '@angular/core';
+import { Directive, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 
 @Directive({
   selector: '[bounce]'
