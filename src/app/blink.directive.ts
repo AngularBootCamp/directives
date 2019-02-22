@@ -1,15 +1,15 @@
-import { Directive, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
+import { Directive, HostBinding, Input, OnDestroy } from '@angular/core';
 
 @Directive({
   selector: '[blink]'
 })
-export class BlinkDirective implements OnInit, OnDestroy {
+export class BlinkDirective implements OnDestroy {
   @HostBinding('style.visibility') viz = 'visible';
-  @Input() public speed: number = 500;
+  @Input() public speed = 500;
 
   private intervalId: number;
 
-  ngOnInit() {
+  constructor() {
     this.intervalId = setInterval(() => {
       this.viz = this.viz === 'visible' ? 'hidden' : 'visible';
     }, this.speed);

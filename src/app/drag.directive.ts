@@ -12,8 +12,8 @@ export class DragDirective {
   @HostBinding('style.left.px') x = 0;
   @HostBinding('style.top.px') y = 0;
 
-  private startX: number;
-  private startY: number;
+  private startX = 0;
+  private startY = 0;
   private mm = this.mousemove.bind(this);
   private mu = this.mouseup.bind(this);
 
