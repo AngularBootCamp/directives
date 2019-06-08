@@ -17,7 +17,9 @@ export class DragDirective {
   private mm = this.mousemove.bind(this);
   private mu = this.mouseup.bind(this);
 
-  @HostListener('mousedown', ['$event']) mousedown(event: MouseEvent) {
+  @HostListener('mousedown', ['$event']) mousedown(
+    event: MouseEvent
+  ) {
     event.preventDefault();
     this.startX = event.pageX - this.x;
     this.startY = event.pageY - this.y;

@@ -1,4 +1,9 @@
-import { Directive, HostBinding, Input, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  HostBinding,
+  Input,
+  OnDestroy
+} from '@angular/core';
 
 @Directive({
   selector: '[blink]'
@@ -10,7 +15,7 @@ export class BlinkDirective implements OnDestroy {
   private intervalId: number;
 
   constructor() {
-    this.intervalId = setInterval(() => {
+    this.intervalId = window.setInterval(() => {
       this.viz = this.viz === 'visible' ? 'hidden' : 'visible';
     }, this.speed);
   }

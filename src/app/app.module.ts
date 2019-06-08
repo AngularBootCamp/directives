@@ -16,4 +16,4 @@ import { DragDirective } from './drag.directive';
   imports: [BrowserModule],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

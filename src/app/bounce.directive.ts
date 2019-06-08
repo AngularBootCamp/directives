@@ -1,17 +1,22 @@
-import { Directive, HostBinding, Input, OnDestroy } from '@angular/core';
+import {
+  Directive,
+  HostBinding,
+  Input,
+  OnDestroy
+} from '@angular/core';
 
 @Directive({
   selector: '[bounce]'
 })
 export class BounceDirective implements OnDestroy {
   @HostBinding('style.transform') transform = '';
-  @Input() public speed: number = 25;
+  @Input() public speed = 25;
 
   private intervalId: number;
   private n = 0;
 
   constructor() {
-    this.intervalId = setInterval(() => {
+    this.intervalId = window.setInterval(() => {
       this.n = this.n + 0.1;
       const rotation = Math.sin(this.n) * 5;
       this.transform = `rotate(${rotation}deg)`;
