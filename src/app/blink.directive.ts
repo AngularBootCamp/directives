@@ -2,26 +2,43 @@ import {
   Directive,
   HostBinding,
   Input,
-  OnDestroy
+  OnDestroy,
+  OnInit
 } from '@angular/core';
 
 @Directive({
   selector: '[blink]'
 })
-export class BlinkDirective implements OnDestroy {
+export class BlinkDirective implements OnDestroy, OnInit {
   @HostBinding('style.visibility') viz = 'visible';
-  @Input() public speed = 500;
+  @Input() set speed(rawSpeed: number | string) {
+    this.stop();
+    this.start(Number(rawSpeed) || 500);
+  }
 
-  private intervalId: number;
+  private intervalId?: number;
 
-  constructor() {
+  ngOnInit() {
+    if (!this.intervalId) {
+      this.start(500);
+    }
+  }
+
+  start(ms: number) {
     this.intervalId = window.setInterval(() => {
       this.viz = this.viz === 'visible' ? 'hidden' : 'visible';
-    }, this.speed);
+    }, ms);
+  }
+
+  stop() {
+    if (this.intervalId) {
+      window.clearInterval(this.intervalId);
+      this.intervalId = undefined;
+    }
   }
 
   ngOnDestroy() {
-    clearInterval(this.intervalId);
+    this.stop();
   }
 }
 
