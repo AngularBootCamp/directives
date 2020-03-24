@@ -5,6 +5,8 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
+import { Subscription, interval } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Directive({
   selector: '[blink]'
@@ -16,24 +18,26 @@ export class BlinkDirective implements OnDestroy, OnInit {
     this.start(Number(rawSpeed) || 500);
   }
 
-  private intervalId?: number;
+  private intervalSubscription: Subscription | undefined;
 
   ngOnInit() {
-    if (!this.intervalId) {
+    if (!this.intervalSubscription) {
       this.start(500);
     }
   }
 
   start(ms: number) {
-    this.intervalId = window.setInterval(() => {
-      this.viz = this.viz === 'visible' ? 'hidden' : 'visible';
-    }, ms);
+    this.intervalSubscription = interval(ms)
+      .pipe(
+        map(() => (this.viz === 'visible' ? 'hidden' : 'visible'))
+      )
+      .subscribe(visibility => (this.viz = visibility));
   }
 
   stop() {
-    if (this.intervalId) {
-      window.clearInterval(this.intervalId);
-      this.intervalId = undefined;
+    if (this.intervalSubscription) {
+      this.intervalSubscription.unsubscribe();
+      this.intervalSubscription = undefined;
     }
   }
 
@@ -41,7 +45,3 @@ export class BlinkDirective implements OnDestroy, OnInit {
     this.stop();
   }
 }
-
-// The above code shows the direct, browser-centric way to do this.
-// There are other ways, such as Observable.interval(), which
-// binds to the browser less tightly and is much more composable.
