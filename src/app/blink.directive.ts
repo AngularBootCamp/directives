@@ -5,8 +5,7 @@ import {
   OnDestroy,
   OnInit
 } from '@angular/core';
-import { Subscription, interval } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subscription, interval, map } from 'rxjs';
 
 @Directive({
   selector: '[blink]'
