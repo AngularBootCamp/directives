@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[bounce]'
+  selector: '[appBounce]'
 })
 export class BounceDirective implements OnDestroy {
   @HostBinding('style.transform') transform = '';
