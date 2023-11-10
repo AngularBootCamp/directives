@@ -1,7 +1,8 @@
 import { Directive, HostBinding, HostListener } from '@angular/core';
 
 @Directive({
-  selector: '[appMakeDraggable]'
+  selector: '[appMakeDraggable]',
+  standalone: true
 })
 export class DragDirective {
   @HostBinding('style.position') position = 'relative';

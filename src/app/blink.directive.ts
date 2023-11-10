@@ -8,7 +8,8 @@ import {
 import { Subscription, interval, map } from 'rxjs';
 
 @Directive({
-  selector: '[appBlink]'
+  selector: '[appBlink]',
+  standalone: true
 })
 export class BlinkDirective implements OnDestroy, OnInit {
   @HostBinding('style.visibility') viz = 'visible';
