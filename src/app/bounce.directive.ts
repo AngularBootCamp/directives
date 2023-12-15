@@ -11,9 +11,11 @@ import {
 })
 export class BounceDirective implements OnDestroy {
   @HostBinding('style.transform') transform = '';
-  @Input() public speed = 25;
+  // Note that this input is not required, because the default is
+  // enough
+  @Input() speed = 25;
 
-  private intervalId: number;
+  private readonly intervalId: number;
   private n = 0;
 
   constructor() {

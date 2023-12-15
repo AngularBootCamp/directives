@@ -13,6 +13,7 @@ import { Subscription, interval, map } from 'rxjs';
 })
 export class BlinkDirective implements OnDestroy, OnInit {
   @HostBinding('style.visibility') viz = 'visible';
+  // Note that this input is not required
   @Input() set speed(rawSpeed: number | string) {
     this.stop();
     this.start(Number(rawSpeed) || 500);
